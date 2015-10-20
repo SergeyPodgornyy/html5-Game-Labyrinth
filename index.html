@@ -3,11 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>HTML 5 game</title>
-	<link rel="stylesheet" href="css/main.css">
+	<script type="text/javascript" src="closure/closure/goog/base.js"></script>
+	<script type="text/javascript" src="js/labyrinth.js"></script>
 </head>
-<body>
-	<canvas id="canvas" width=400 height=400>Your browser does not support HTML 5 canvas. Use the latest version of browser.
-Oh, and enable JavaScript in browser settings.</canvas>
-	<script src="js/game.js"></script>
+<body onload="labyrinth.start()" style="background: #949494">
 </body>
 </html>
