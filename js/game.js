@@ -23,6 +23,9 @@ function init(){
 }
 
 function update(){
+	frogY = frogY + 3;
+	context.clearRect(0,0,400,400);
+
 	context.drawImage(imgFrog, frogX,frogY,100,77);
 
 	context.fillRect(10,10,40,380,"#000");
