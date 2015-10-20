@@ -31,6 +31,8 @@ labyrinth.start = function(){
     this.walls = [];
     this.badges = [];
     this.createWalls();
+    this.createBadges();
+    this.positionBadgesAndFrog();
 
     // create game buttons
     var analogStick = new this.lime.Sprite().setSize(350,372).setPosition(1150,400).setFill('img/analogStick.png').setAnchorPoint(0,0);
@@ -45,6 +47,9 @@ labyrinth.start = function(){
     this.gameScene.appendChild(gameBackground);
     for (var i=0;i<this.walls.length;i++) {
         this.gameScene.appendChild(this.walls[i]);
+    }
+    for (i=0;i<this.badges.length;i++) {
+        this.gameScene.appendChild(this.badges[i]);
     }
     this.gameScene.appendChild(this.frog);
     this.gameScene.appendChild(analogStick);
@@ -93,6 +98,33 @@ labyrinth.createWalls = function(){
         var wall = new this.lime.Sprite().setAnchorPoint(0,0).setPosition(current[0],current[1]).setSize(current[2]-current[0],current[3]-current[1]).setFill('#222222');
         this.walls.push(wall);
     }
+};
+
+labyrinth.createBadges = function() {
+    var badges = [];
+    var badgeNames = [
+        ["html"],
+        ["css"],
+        ["js"]
+    ];
+    var i;
+    for (i=0;i<badgeNames.length;i++) {
+        var current = badgeNames[i];
+        var badge = new this.lime.Sprite().setSize(80,87).setFill('img/badge-' + current[0] + '.png');
+        this.badges.push(badge);
+    }
+};
+
+labyrinth.positionBadgesAndFrog = function() {
+  var badgeCoordinates = [
+        [390,390],
+        [840,240],
+        [990,390]
+  ];
+  for (var i=0;i<this.badges.length;i++) {
+        this.badges[i].setPosition(badgeCoordinates[i][0],badgeCoordinates[i][1]);
+  }
+  this.frog.setPosition(90,690);
 };
 
 //this is required for outside access after code is compiled in ADVANCED_COMPILATIONS mode
