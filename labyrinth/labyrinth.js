@@ -33,6 +33,7 @@ labyrinth.start = function(){
     this.createWalls();
     this.createBadges();
     this.positionBadgesAndFrog();
+    this.badgesEarned = 0;
 
     // create game buttons
     var analogStick = new this.lime.Sprite().setSize(350,372).setPosition(1150,400).setFill('img/analogStick.png').setAnchorPoint(0,0);
@@ -190,6 +191,18 @@ labyrinth.checkMovement = function(dt) {
     // if no obstacles are hit, move the frog
     this.frog.setPosition(futureX,futureY);
 
+    // check if new position hits a badge
+    for(i in this.badges) {
+      badge = this.badges[i];
+      badgeTopY = badge.getPosition().y-(badge.getSize().height/2);
+      badgeBottomY = badgeTopY+badge.getSize().height;
+      badgeLeftX = badge.getPosition().x-(badge.getSize().width/2);
+      badgeRightX = badgeLeftX+badge.getSize().width;
+      if (futureRightX > badgeLeftX && futureLeftX < badgeRightX && futureBottomY > badgeTopY && futureTopY < badgeBottomY) {
+        this.badgesEarned++;
+        this.badges[i].setPosition(1200+50*this.badgesEarned,100);
+      }
+    }
   }
 };
 
