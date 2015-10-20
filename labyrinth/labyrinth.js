@@ -168,11 +168,27 @@ labyrinth.checkMovement = function(dt) {
         break;
     }
 
-
+    // check if future position hits an obstacle
+    // stop movement and return false if so
+    futureTopY = futureY - (this.frog.getSize().height/2);
+    futureBottomY = futureTopY + this.frog.getSize().height;
+    futureLeftX = futureX - (this.frog.getSize().width/2);
+    futureRightX = futureLeftX + this.frog.getSize().width;
+    var i;
+    for(i in this.walls) {
+      wall = this.walls[i];
+      wallTopY = wall.getPosition().y;
+      wallBottomY = wallTopY+wall.getSize().height;
+      wallLeftX = wall.getPosition().x;
+      wallRightX = wallLeftX+wall.getSize().width;
+      if (futureRightX > wallLeftX && futureLeftX < wallRightX && futureBottomY > wallTopY && futureTopY < wallBottomY) {
+         this.frog.isMoving = false;
+         return false;
+      }
+    }
 
     // if no obstacles are hit, move the frog
     this.frog.setPosition(futureX,futureY);
-
 
   }
 };
