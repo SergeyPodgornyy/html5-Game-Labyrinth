@@ -2,6 +2,7 @@ goog.provide('labyrinth');
 goog.require('lime.Director');
 goog.require('lime.Scene');
 goog.require('lime.Sprite');
+goog.require('labyrinth.Frog');
 
 labyrinth.start = function(){
 
