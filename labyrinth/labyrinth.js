@@ -58,7 +58,7 @@ labyrinth.start = function(){
 
     // add one task to the schedule manager: check if the frog is moving
     this.lime.scheduleManager.schedule(function(dt) {
-        // this.checkVictory();
+        this.checkVictory();
         this.checkMovement(dt);
         //dt - stand for "delta time"
     }, labyrinth);
@@ -203,6 +203,15 @@ labyrinth.checkMovement = function(dt) {
         this.badges[i].setPosition(1200+50*this.badgesEarned,100);
       }
     }
+  }
+};
+
+labyrinth.checkVictory = function() {
+  if (this.badgesEarned == this.badges.length) {
+    alert("Hey, congratulations! You've won!");
+    this.badgesEarned = 0;
+    this.frog.isMoving = false;
+    this.positionBadgesAndFrog();
   }
 };
 
