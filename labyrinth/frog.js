@@ -13,3 +13,8 @@ labyrinth.Frog = function() {
 };
 
 goog.inherits(labyrinth.Frog,lime.Sprite);
+
+labyrinth.Frog.prototype.startMovement = function(direction) {
+  this.isMoving = true;
+  this.direction = direction;
+}; 

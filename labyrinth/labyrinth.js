@@ -41,7 +41,26 @@ labyrinth.start = function(){
     var buttonDown = new this.lime.Sprite().setSize(120,120).setPosition(1265,631).setAnchorPoint(0,0);
     var buttonLeft = new this.lime.Sprite().setSize(115,114).setPosition(1151,518).setAnchorPoint(0,0);
 
+    // add events to four buttons
+    goog.events.listen(buttonUp,["mousedown","touchstart"],function(e) {
+        this.startMovement(NORTH);
+    }, null, this.frog);
+    goog.events.listen(buttonRight,["mousedown","touchstart"],function(e) {
+        this.startMovement(EAST);
+    }, null, this.frog);
+    goog.events.listen(buttonDown,["mousedown","touchstart"],function(e) {
+        this.startMovement(SOUTH);
+    }, null, this.frog);
+    goog.events.listen(buttonLeft,["mousedown","touchstart"],function(e) {
+        this.startMovement(WEST);
+    }, null, this.frog);
 
+    // add one task to the schedule manager: check if the frog is moving
+    this.lime.scheduleManager.schedule(function(dt) {
+        // this.checkVictory();
+        this.checkMovement(dt);
+        //dt - stand for "delta time"
+    }, labyrinth);
 
     // add objects to the main game scene
     this.gameScene.appendChild(gameBackground);
@@ -125,6 +144,37 @@ labyrinth.positionBadgesAndFrog = function() {
         this.badges[i].setPosition(badgeCoordinates[i][0],badgeCoordinates[i][1]);
   }
   this.frog.setPosition(90,690);
+};
+
+labyrinth.checkMovement = function(dt) {
+
+  if (this.frog.isMoving) {
+
+    // determine future position
+    var futureX = this.frog.getPosition().x;
+    var futureY = this.frog.getPosition().y;
+    switch (this.frog.direction) {
+      case NORTH:
+        futureY = futureY - this.frog.speed*dt;
+        break;
+      case EAST:
+        futureX = futureX + this.frog.speed*dt;
+        break;
+      case SOUTH:
+        futureY = futureY + this.frog.speed*dt;
+        break;
+      case WEST:
+        futureX = futureX - this.frog.speed*dt;
+        break;
+    }
+
+
+
+    // if no obstacles are hit, move the frog
+    this.frog.setPosition(futureX,futureY);
+
+
+  }
 };
 
 //this is required for outside access after code is compiled in ADVANCED_COMPILATIONS mode
