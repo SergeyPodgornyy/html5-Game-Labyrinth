@@ -23,11 +23,20 @@ labyrinth.start = function(){
 
     // create game buttons
     var analogStick = new this.lime.Sprite().setSize(350,372).setPosition(1150,400).setFill('img/analogStick.png').setAnchorPoint(0,0);
+    var buttonUp = new this.lime.Sprite().setSize(120,120).setPosition(1265,400).setAnchorPoint(0,0);
+    var buttonRight = new this.lime.Sprite().setSize(115,114).setPosition(1384,518).setAnchorPoint(0,0);
+    var buttonDown = new this.lime.Sprite().setSize(120,120).setPosition(1265,631).setAnchorPoint(0,0);
+    var buttonLeft = new this.lime.Sprite().setSize(115,114).setPosition(1151,518).setAnchorPoint(0,0);
+
 
 
     // add objects to the main game scene
     this.gameScene.appendChild(gameBackground);
     this.gameScene.appendChild(analogStick);
+    this.gameScene.appendChild(buttonUp);
+    this.gameScene.appendChild(buttonRight);
+    this.gameScene.appendChild(buttonDown);
+    this.gameScene.appendChild(buttonLeft);
 
     // set the scene
     this.director.replaceScene(this.gameScene);
